@@ -10,7 +10,7 @@
 
 ### 1.2 主从复制
 
-![](D:/workspace/%E9%9D%A2%E8%AF%95/resource/images/mysql-sync.jpg)
+![](./resource/images/mysql-sync.jpg)
 
 1.  从库通过命令 change master to 链接主库，获取主库的 binlog 信息（file_name, position）
 2.  从库的 IO 线程与主库的 log dump 线程建立连接
