@@ -216,11 +216,9 @@
         -   low_limit_id：当前 read view 生成时刻尚未分配的下一个事务ID
         -   creator_trx_id：生成当前 read view 的事务ID
 
-    
-
 #### 2.4.3 执行步骤
 
-![](D:/workspace/%E9%9D%A2%E8%AF%95/resource/images/mysql-mvcc.jpg)
+![](./resource/images/mysql-mvcc.jpg)
 
 ### 2.5 索引
 
