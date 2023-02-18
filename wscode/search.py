@@ -37,8 +37,8 @@ class Search(object):
         
         if left >= len(nums) or target != nums[left]:
             result = -1
-        
-        result = left
+        else:
+            result = left
 
         return result
     
@@ -59,7 +59,7 @@ class Search(object):
         
         if right < 0 or target != nums[right]:
             result = -1
-        
-        result = right
+        else:
+            result = right
 
         return result
