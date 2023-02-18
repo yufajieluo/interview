@@ -190,7 +190,7 @@
 
 -   可实现高可用
 -   概念
-    -   Queue：负责 AMQP 协议的实现，以及消息的 commit、rollback、confirm 登
+    -   Queue：负责 AMQP 协议的实现，以及消息的 commit、rollback、confirm 等
     -   mirror_queue_master/slave：负责消息的处理
         -   BlockingQueue：真正存放消息的队列
     -   GM：负责节点之间的消息同步，所有的 GM 链成 gm_group 循环链表
