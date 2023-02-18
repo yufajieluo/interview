@@ -62,7 +62,7 @@
 
 ### 2.4 ISR
 
-![](D:/workspace/%E9%9D%A2%E8%AF%95/resource/images/kafka-isr.jpg)
+![](./resource/images/kafka-isr.jpg)
 
 -   标志位
     -   LogStartOffset：起始位置
