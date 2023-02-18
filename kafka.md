@@ -79,7 +79,7 @@
     -   replica.lag.time.max.ms
     -   意义：
         -   在过去的 replica.lag.time.max.ms 时间内，Follower 已经追赶上 Leader 一次，而不是简单的在此时间内有同步消息
-        -   当 Leader 的消息写入速度大于 Follower 的同步速度时，Follower 与 Leader 的差距会越来越大，这种情况下仅参考在参数时间内有同步操作将没有任何意义
+        -   当 Leader 的消息写入速度大于 Follower 的同步速度时，Follower 与 Leader 的差距会越来越大，这种情况下仅判断在参数时间内有同步操作将没有任何意义
 
 
 
