@@ -73,7 +73,7 @@
 -   content-type：消息体的 MIME 类型，如 application/json 等
 -   content-encoding：消息体的编码类型，如是否压缩等
 -   message-id：消息的唯一标识
--   correlation-id：关联消息的唯一标识，一般用于消息的相应，标识针对哪一条消息的响应
+-   correlation-id：关联消息的唯一标识，一般用于消息的响应，标识针对哪一条消息的响应
 -   timestamp：消息创建时刻的时间戳，精确到秒
 -   expiration：消息过期时刻的时间戳，精确到秒
 -   delivery-mode：持久化标志，1-非持久化，2-持久化
