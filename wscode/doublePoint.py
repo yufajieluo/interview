@@ -77,3 +77,46 @@ class DoublePoint(object):
             left += 1
             right -= 1
         return nums
+
+    # 最小覆盖子串，题号：76
+    def slid_window_cover_min(self, s, t):
+        result = ''
+
+        need = collections.defaultdict(int)
+        wind = collections.defaultdict(int)
+        for char in t:
+            need[char] += 1
+
+        left = 0
+        right = 0
+        valid = 0
+        start, last_len = 0, len(s) + 1
+        while right < len(s):
+            # 右移窗口
+            next_char = s[right]
+            right += 1
+            
+            # 窗口内数据是否需要更新
+            if next_char in need:
+                wind[next_char] += 1
+                if wind[next_char] == need[next_char]:
+                    valid += 1
+            
+            print('wind [{}, {}]'.format(left, right))
+
+            # 窗口是否需要左侧收缩
+            while valid == len(need):
+                if right - left < last_len:
+                    start = left
+                    last_len = right - left
+                # 左移窗口
+                remove_char = s[left]
+                left += 1
+                # 窗口内数据是否需要更新
+                if remove_char in need:
+                    if wind[remove_char] == need[remove_char]:
+                        valid -= 1
+                    wind[remove_char] -= 1
+            
+        result = s[start: start + last_len] if last_len < len(s) + 1 else ''
+        return result
