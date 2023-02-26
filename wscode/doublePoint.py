@@ -78,8 +78,12 @@ class DoublePoint(object):
             right -= 1
         return nums
 
-    # 最小覆盖子串，题号：76
-    def slid_window_cover_min(self, s, t):
+    '''
+    最小覆盖子串：
+    
+    给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
+    '''
+    def leetcode_76(self, s, t):
         result = ''
 
         need = collections.defaultdict(int)
@@ -119,4 +123,51 @@ class DoublePoint(object):
                     wind[remove_char] -= 1
             
         result = s[start: start + last_len] if last_len < len(s) + 1 else ''
+        return result
+    
+    '''
+    字符串的排列：
+    
+    给你两个字符串 s1 和 s2 ，写一个函数来判断 s2 是否包含 s1 的排列。如果是，返回 true ；否则，返回 false 。
+
+    换句话说，s1 的排列之一是 s2 的 子串 。
+    '''
+    def leetcode_576(self, s1: str, s2: str) -> bool:
+        result = False
+
+        need = collections.defaultdict(int)
+        wind = collections.defaultdict(int)
+        for char in s1:
+            need[char] += 1
+        
+        left, right = 0, 0
+        valid = 0
+
+        while right < len(s2):
+            # 右扩窗口
+            next_char = s2[right]
+            right += 1
+
+            # 窗口内数据是否需要更新
+            if next_char in need:
+                wind[next_char] += 1
+                if wind[next_char] == need[next_char]:
+                    valid += 1
+            
+            #print('wind is {}, left is {}, right is {}, valid is {}'.format(wind, left, right, valid))
+
+            # 窗口是否需要左侧收缩
+            while right - left >= len(s1):
+                if valid == len(need):
+                    result = True
+                    return result
+                else:
+                    remove_char = s2[left]
+                    left += 1
+                    # 窗口内数据是否需要更新
+                    if remove_char in need:
+                        if wind[remove_char] == need[remove_char]:
+                            valid -= 1
+                        wind[remove_char] -= 1
+        
         return result
