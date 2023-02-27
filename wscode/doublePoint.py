@@ -171,3 +171,81 @@ class DoublePoint(object):
                         wind[remove_char] -= 1
         
         return result
+    
+    '''
+    找到字符串中所有字母异位词
+    
+    给定两个字符串 s 和 p，找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。
+
+    异位词 指由相同字母重排列形成的字符串（包括相同的字符串）。
+    '''
+    def leetcode_438(self, s: str, p: str) -> List[int]:
+        result = []
+
+        need = collections.defaultdict(int)
+        wind = collections.defaultdict(int)
+        for char in p:
+            need[char] += 1
+        
+        left, right = 0, 0
+        valid = 0
+
+        while right < len(s):
+            # 右扩窗口
+            next_char = s[right]
+            right += 1
+
+            # 窗口内数据是否需要更新
+            if next_char in need:
+                wind[next_char] += 1
+                if wind[next_char] == need[next_char]:
+                    valid += 1
+            
+            # 窗口是否需要左侧收缩
+            while right - left >= len(p):
+                if valid == len(need):
+                    result.append(left)
+                
+                remove_char = s[left]
+                left += 1
+
+                # 窗口内数据是否需要更新
+                if remove_char in need:
+                    if wind[remove_char] == need[remove_char]:
+                        valid -= 1
+                    wind[remove_char] -= 1
+
+        return result
+    
+    
+    '''
+    无重复字符的最长子串
+    
+    给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
+    '''
+    def leetcode_3(self, s: str) -> int:
+        result = 0
+
+        wind = collections.defaultdict(int)
+
+        left, right = 0, 0
+        while right < len(s):
+            # 右扩窗口
+            next_char = s[right]
+            right += 1
+
+            # 窗口内数据是否需要更新
+            wind[next_char] += 1
+
+            # 窗口是否需要左侧收缩
+            while wind[next_char] > 1:
+                remove_char = s[left]
+                left += 1
+
+                # 窗口内数据是否需要更新
+                wind[remove_char] -= 1    
+            
+            result = max(result, right - left)
+        
+        return result
+    
