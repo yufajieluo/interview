@@ -1,3 +1,12 @@
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+# vim: tabstop=4 shiftwidth=4 softtabstop=4
+# @File: nSum.py
+# @Time: 2023/03/02 00:05:43
+# @Author: WShuai.
+# @License : (C)Copyright 2023 WShuai.
+
+
 import collections
 from typing import List
 

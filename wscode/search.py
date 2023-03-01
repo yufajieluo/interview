@@ -1,3 +1,11 @@
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+# vim: tabstop=4 shiftwidth=4 softtabstop=4
+# @File: search.py
+# @Time: 2023/03/02 00:05:52
+# @Author: WShuai.
+# @License : (C)Copyright 2023 WShuai.
+
 
 from typing import List
 
