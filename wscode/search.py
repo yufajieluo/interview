@@ -1,9 +1,15 @@
+
+from typing import List
+
 class Search(object):
     def __init__(self) -> None:
         return
     
-    # 二分查找普通
-    def binary(self, nums, target):
+    
+    def leetcode_704(self, nums: List[int], target: int) -> int:
+        '''
+        二分查找
+        '''
         result = -1
 
         left = 0
@@ -20,8 +26,12 @@ class Search(object):
 
         return result
     
-    # 二分查找左边界
+    
     def binary_bound_left(self, nums, target):
+        '''
+        二分查找左边界
+        '''
+
         result = -1
 
         left = 0
@@ -42,8 +52,12 @@ class Search(object):
 
         return result
     
-    # 二分查找右边界
+   
     def binary_bound_right(self, nums, target):
+        '''
+        二分查找右边界
+        '''
+
         result = -1
 
         left = 0

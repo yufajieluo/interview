@@ -1,15 +1,21 @@
+import collections
+from typing import List, Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+        return
+
 class DoublePoint(object):
     def __init__(self) -> None:
         return
     
-    # Definition for singly-linked list.
-    # class ListNode:
-    #     def __init__(self, x):
-    #         self.val = x
-    #         self.next = None
 
-    # 判断是否有环
-    def cycle_detect(self, head):
+    def leetcode_141(self, head: Optional[ListNode]) -> bool:
+        '''
+        单链表是否有环
+        '''
         result = False
         slow = head
         fast = head
@@ -21,8 +27,11 @@ class DoublePoint(object):
                 break
         return result
     
-    # 判断是否有环，如果有环则返回环的起点
-    def cycle_head(self, head):
+    
+    def leetcode_142(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        '''
+        单链表是否有环，有环则返回环的起点
+        '''
         result = False
         is_cycle = False
         slow = head
@@ -43,8 +52,16 @@ class DoublePoint(object):
         
         return result
 
-    # 无环单链表的中点
-    def uncycle_middle(self, head):
+    
+    def leetcode_876(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        '''
+        无环单链表的中点
+
+        给你单链表的头结点 head ，请你找出并返回链表的中间结点。
+
+        如果有两个中间结点，则返回第二个中间结点。
+        '''
+
         result = None
         slow = head
         fast = head
@@ -54,8 +71,15 @@ class DoublePoint(object):
         result = slow
         return result
     
-    # 无环单链表的倒数第 k 个元素
-    def uncycle_last(self, head, k):
+
+    def leetcode_o22(self, head: ListNode, k: int) -> ListNode:
+        '''
+        无环单链表的倒数第 k 个元素
+
+        输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。
+
+        例如，一个链表有 6 个节点，从头节点开始，它们的值依次是 1、2、3、4、5、6。这个链表的倒数第 3 个节点是值为 4 的节点。
+        '''
         result = None
         slow = head
         fast = head
@@ -78,12 +102,14 @@ class DoublePoint(object):
             right -= 1
         return nums
 
-    '''
-    最小覆盖子串：
     
-    给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
-    '''
-    def leetcode_76(self, s, t):
+    def leetcode_76(self, s: str, t: str) -> str:
+        '''
+        最小覆盖子串：
+        
+        给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
+        '''
+
         result = ''
 
         need = collections.defaultdict(int)
@@ -125,14 +151,16 @@ class DoublePoint(object):
         result = s[start: start + last_len] if last_len < len(s) + 1 else ''
         return result
     
-    '''
-    字符串的排列：
     
-    给你两个字符串 s1 和 s2 ，写一个函数来判断 s2 是否包含 s1 的排列。如果是，返回 true ；否则，返回 false 。
-
-    换句话说，s1 的排列之一是 s2 的 子串 。
-    '''
     def leetcode_576(self, s1: str, s2: str) -> bool:
+        '''
+        字符串的排列：
+        
+        给你两个字符串 s1 和 s2 ，写一个函数来判断 s2 是否包含 s1 的排列。如果是，返回 true ；否则，返回 false 。
+
+        换句话说，s1 的排列之一是 s2 的 子串 。
+        '''
+
         result = False
 
         need = collections.defaultdict(int)
@@ -172,14 +200,16 @@ class DoublePoint(object):
         
         return result
     
-    '''
-    找到字符串中所有字母异位词
     
-    给定两个字符串 s 和 p，找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。
-
-    异位词 指由相同字母重排列形成的字符串（包括相同的字符串）。
-    '''
     def leetcode_438(self, s: str, p: str) -> List[int]:
+        '''
+        找到字符串中所有字母异位词
+        
+        给定两个字符串 s 和 p，找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。
+
+        异位词 指由相同字母重排列形成的字符串（包括相同的字符串）。
+        '''
+
         result = []
 
         need = collections.defaultdict(int)
@@ -218,12 +248,13 @@ class DoublePoint(object):
         return result
     
     
-    '''
-    无重复字符的最长子串
     
-    给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
-    '''
     def leetcode_3(self, s: str) -> int:
+        '''
+        无重复字符的最长子串
+        
+        给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
+        '''
         result = 0
 
         wind = collections.defaultdict(int)
