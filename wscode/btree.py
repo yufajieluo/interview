@@ -36,6 +36,26 @@ class Btree(object):
         self.dlr_real(root.left, result)
         self.dlr_real(root.right, result)
         return result
+    
+    def dlr_iteration(self, root: Optional[TreeNode]):
+        '''
+        前序遍历 - 迭代
+        '''
+        result = []
+        if root:
+            stack = [root]
+            while stack:
+                node = stack.pop()
+                if node:
+                    if node.right:
+                        stack.append(node.right)
+                    if node.left:
+                        stack.append(node.left)
+                    stack.append(node)
+                    stack.append(None)
+                else:
+                    result.append(stack.pop().val)
+        return result
 
     def ldr(self, root: Optional[TreeNode]):
         '''
@@ -54,6 +74,26 @@ class Btree(object):
         self.ldr_real(root.left, result)
         result.append(root.val)
         self.ldr_real(root.right, result)
+        return result
+
+    def ldr_iteration(self, root: Optional[TreeNode]):
+        '''
+        中序遍历 - 迭代
+        '''
+        result = []
+        if root:
+            stack = [root]
+            while stack:
+                node = stack.pop()
+                if node:
+                    if node.right:
+                        stack.append(node.right)
+                    stack.append(node)
+                    stack.append(None)
+                    if node.left:
+                        stack.append(node.left)
+                else:
+                    result.append(stack.pop().val)
         return result
 
     def lrd(self, root: Optional[TreeNode]):
@@ -75,11 +115,24 @@ class Btree(object):
         result.append(root.val)
         return result
 
-    def dfs(self, root: Optional[TreeNode]):
+    def ldr_iteration(self, root: Optional[TreeNode]):
+        '''
+        后序遍历 - 迭代
+        '''
         result = []
-
-
-
+        if root:
+            stack = [root]
+            while stack:
+                node = stack.pop()
+                if node:
+                    stack.append(node)
+                    stack.append(None)
+                    if node.right:
+                        stack.append(node.right)
+                    if node.left:
+                        stack.append(node.left)
+                else:
+                    result.append(stack.pop().val)
         return result
 
     def bfs(self, root: Optional[TreeNode]):
@@ -88,15 +141,35 @@ class Btree(object):
         '''
         result = []
 
-        queue = [root]
-        while queue:
-            node = queue.pop(0)
-            result.append(node.val)
-            if node.left:
-                queue.append(node.left)
-            if node.right:
-                queue.append(node.right)
+        if root:
+            queue = [root]
+            while queue:
+                node = queue.pop(0)
+                result.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
 
+        return result
+
+    def bfs_default_val(self, root: Optional[TreeNode]):
+        '''
+        广度优先遍历 - 迭代 - 带空值
+        '''
+        result = []
+        default_value = 0
+
+        if root:
+            queue = [root]
+            while queue:
+                node = queue.pop(0)
+                if not node:
+                    result.append(default_value)
+                else:
+                    result.append(node.val)
+                    queue.append(node.left)
+                    queue.append(node.right)
         return result
 
 
@@ -144,7 +217,7 @@ class Btree(object):
                         break
                 if leaf:
                     break
-                
+
         return result
 
 if __name__ == '__main__':
@@ -159,6 +232,7 @@ if __name__ == '__main__':
     node_20.right = node_7
 
     btree = Btree()
+    '''
     result = btree.dlr(root)
     print(result)
     result = btree.ldr(root)
@@ -167,4 +241,5 @@ if __name__ == '__main__':
     print(result)
     result = btree.bfs_queue(root)
     print(result)
-
+    '''
+    print(btree.dlr_iteration(root))
