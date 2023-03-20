@@ -6,6 +6,7 @@
 # @Author: WShuai.
 # @License : (C)Copyright 2023 WShuai.
 
+import copy
 from typing import List, Optional
 
 class TreeNode:
@@ -220,6 +221,114 @@ class Btree(object):
 
         return result
 
+
+    def plus(self, source, index):
+        val = (int(source[index]) + 1) % 10
+        return '{}{}{}'.format(source[:index], val, source[index+1:])
+
+    def minus(self, source, index):
+        val = (int(source[index]) - 1) % 10
+        return '{}{}{}'.format(source[:index], val, source[index+1:])
+
+    def leetcode_752(self, deadends: List[str], target: str) -> int:
+        result = -1
+        search = None
+        visited = set()
+
+        root = '0000'
+        queue = [root]
+        visited.add(root)
+
+        depth = 0
+        while queue:
+            current_size = len(queue)
+            for _ in range(current_size):
+                node = queue.pop(0)
+                if node in deadends:
+                    continue
+                if node == target:
+                    search = True
+                    break
+                for index in range(4):
+                    next_node_plus = self.plus(node, index)
+                    if next_node_plus not in visited:
+                        queue.append(next_node_plus)
+                        visited.add(next_node_plus)
+                    
+                    next_node_minus = self.minus(node, index)
+                    if next_node_minus not in visited:
+                        queue.append(next_node_minus)
+                        visited.add(next_node_minus)
+            
+            if search:
+                break
+            else:
+                depth += 1
+        
+        result = depth if search else -1
+        return result
+
+    def search_space(self, source, target):
+        result = []
+        for index_r, row in enumerate(source):
+            for index_c, col in enumerate(row):
+                if col == 0:
+                    result = [index_r, index_c]
+                    break
+        return result
+
+    def next_value(self, source, coord):
+        result = []
+        if coord[0] > 0:
+            next_up = copy.deepcopy(source)
+            next_up[coord[0] - 1][coord[1]], next_up[coord[0]][coord[1]] = next_up[coord[0]][coord[1]], next_up[coord[0] - 1][coord[1]]
+            result.append(next_up)
+        if coord[0] < len(source) - 1:
+            next_down = copy.deepcopy(source)
+            next_down[coord[0] + 1][coord[1]], next_down[coord[0]][coord[1]] = next_down[coord[0]][coord[1]], next_down[coord[0] + 1][coord[1]]
+            result.append(next_down)
+        if coord[1] > 0:
+            next_left = copy.deepcopy(source)
+            next_left[coord[0]][coord[1] - 1], next_left[coord[0]][coord[1]] = next_left[coord[0]][coord[1]], next_left[coord[0]][coord[1] - 1]
+            result.append(next_left)
+        if coord[1] < len(source[0]) - 1:
+            next_right = copy.deepcopy(source)
+            next_right[coord[0]][coord[1] + 1], next_right[coord[0]][coord[1]] = next_right[coord[0]][coord[1]], next_right[coord[0]][coord[1] + 1]
+            result.append(next_right)
+        return result
+
+    def leetcode_773(self, board: List[List[int]], target: List[List[int]]) -> int:
+        result = -1
+        depth = 0
+        search = False
+
+        queue = [board]
+        visited = set()
+        visited.add(str(board))
+        
+        while queue:
+            current_size = len(queue)
+            for _ in range(current_size):
+                node = queue.pop(0)
+                if node == target:
+                    search = True
+                    break
+                coord = self.search_space(node, 0)
+                nodes = self.next_value(node, coord)
+                for next in nodes:
+                    if str(next) not in visited:
+                        queue.append(next)
+                        visited.add(str(next))
+            
+            if search:
+                break
+            else:
+                depth += 1
+
+        result = depth if search else -1
+        return result
+
+import time
 if __name__ == '__main__':
     root = TreeNode(-10, None, None)
     node_9 = TreeNode(9, None, None)
@@ -241,5 +350,12 @@ if __name__ == '__main__':
     print(result)
     result = btree.bfs_queue(root)
     print(result)
-    '''
+    
     print(btree.dlr_iteration(root))
+   
+    print(btree.openLock(["0201","0101","0102","1212","2002"], '0202'))
+    '''
+    
+
+    source = [[1,2,3],[5,4,0]]
+    print(btree.slidingPuzzle(source, [[1,2,3],[4,5,0]]))
